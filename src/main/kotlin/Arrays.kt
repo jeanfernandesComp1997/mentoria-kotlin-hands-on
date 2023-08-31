@@ -9,6 +9,14 @@ fun main() {
     // Arrays para tipos primitivos
 
     val x = intArrayOf(1, 2, 3)
+    // Opções
+    //    byteArrayOf()
+    //    booleanArrayOf()
+    //    charArrayOf()
+    //    floatArrayOf()
+    //    doubleArrayOf()
+    //    longArrayOf()
+    //    shortArrayOf()
 
     // Array of int of size 5 with values [0, 0, 0, 0, 0]
     val arr = IntArray(5)

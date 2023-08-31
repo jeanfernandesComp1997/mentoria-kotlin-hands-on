@@ -9,24 +9,57 @@ class Dog(
     val breed: String,
     val size: String,
     val dateOfBirth: Date,
-    val color: String
+    val color: String,
+    private var isSleeping: Boolean = false
 ) {
 
-    fun eat() {
-        println("The dog is eating")
+    fun eat(foodIsPremium: Boolean) {
+        if (!isSleeping) {
+            if (foodIsPremium) {
+                println("The dog is eating")
+            } else {
+                println("The dog eats only premium food")
+            }
+        } else {
+            println("The dog is sleeping")
+        }
     }
 
     fun sleep() {
-        println("the dog is sleeping")
+        if (isSleeping) {
+            println("the dog is already sleeping")
+        } else {
+            isSleeping = true
+            println("the dog is sleeping now")
+        }
     }
 
     fun sit() {
-        println("The dog is sitting")
+        if (!isSleeping) {
+            println("The dog is sitting")
+        } else {
+            println("The dog is sleeping now")
+        }
     }
 
     fun run() {
-        println("The dog is running")
+        if (!isSleeping) {
+            println("The dog is running")
+        } else {
+            println("The dog is sleeping now")
+        }
     }
+
+    fun wakeUp() {
+        if (!isSleeping) {
+            println("The dog is already awake")
+        } else {
+            isSleeping = false
+            println("The dog is awake now")
+        }
+    }
+
+    fun isSleepingNow() = isSleeping
 
     private fun ageInDays(): Int {
         val now = Date()
