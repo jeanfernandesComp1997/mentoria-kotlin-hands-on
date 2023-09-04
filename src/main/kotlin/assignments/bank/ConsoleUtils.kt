@@ -22,10 +22,6 @@ object ConsoleUtils {
         println("============= CRIAR CONTA =============")
     }
 
-    fun balanceHeader() {
-        println("============= SALDO DA CONTA =============")
-    }
-
     fun loginHeader() {
         println("============= LOGAR NA CONTA =============")
     }

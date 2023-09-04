@@ -26,4 +26,15 @@ class Account(
         balance += value
         println("Depósito realizado com sucesso.")
     }
+
+    fun printBalance() {
+        println(
+            """
+            ============= SALDO DA CONTA =============
+            ID da conta:     $id
+            Nome do Titular: $ownerAccountName
+            Saldo:           $balance
+        """.trimIndent()
+        )
+    }
 }

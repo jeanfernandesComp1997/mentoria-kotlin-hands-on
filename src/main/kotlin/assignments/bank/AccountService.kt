@@ -42,17 +42,4 @@ class AccountService {
             .find { account.id == it.id }
             .let { it?.balance = account.balance }
     }
-
-    fun printBalance(accountId: String) {
-        val account = listOfAccounts
-            .find { accountId == it.id } ?: throw RuntimeException("Account $accountId not found.")
-
-        println(
-            """
-            ID da conta:     ${account.id}
-            Nome do Titular: ${account.ownerAccountName}
-            Saldo:           ${account.balance}
-        """.trimIndent()
-        )
-    }
 }

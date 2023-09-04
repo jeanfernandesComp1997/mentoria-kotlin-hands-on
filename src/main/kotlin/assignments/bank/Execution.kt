@@ -83,10 +83,8 @@ fun main() {
             }
 
             5 -> {
-                ConsoleUtils.balanceHeader()
-
                 if (account != null) {
-                    accountService.printBalance(account.id)
+                    account.printBalance()
                 } else {
                     println("Erro usuário não logado.")
                 }
