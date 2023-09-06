@@ -8,10 +8,21 @@ object ConsoleUtils {
             ============= MENU =============
             1 - Criar conta
             2 - Logar na conta
-            3 - Depositar
-            4 - Sacar
-            5 - Verificar saldo
-            6 - Sair
+            3 - Encerrar
+            
+            Selecione uma opção: 
+        """.trimIndent()
+        )
+    }
+
+    fun printLoggedMenu() {
+        print(
+            """
+            ============= MENU =============
+            1 - Depositar
+            2 - Sacar
+            3 - Verificar saldo
+            4 - Sair
             
             Selecione uma opção: 
         """.trimIndent()

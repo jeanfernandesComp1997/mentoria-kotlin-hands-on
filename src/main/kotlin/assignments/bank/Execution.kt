@@ -7,96 +7,104 @@ fun main() {
     val accountService = AccountService()
 
     var execution = true
-    var account: Account? = null
+    var loggedAccount: Account? = null
 
     while (execution) {
-        ConsoleUtils.printMenu()
-        val action = readln().toInt()
+        var action: Int
 
-        when (action) {
-            1 -> {
-                ConsoleUtils.createAccountHeader()
+        if (loggedAccount == null) {
+            ConsoleUtils.printMenu()
+            action = readln().toInt()
 
-                print("Digite o id da conta: ")
-                val id = readln()
+            when (action) {
+                1 -> {
+                    ConsoleUtils.createAccountHeader()
 
-                print("Digite o nome do titular da conta: ")
-                val ownerAccountName = readln()
+                    print("Digite o id da conta: ")
+                    val id = readln()
 
-                print("Digite a senha da conta: ")
-                val password = readln()
+                    print("Digite o nome do titular da conta: ")
+                    val ownerAccountName = readln()
 
-                accountService.createAccount(id, ownerAccountName, password)
-            }
+                    print("Digite a senha da conta: ")
+                    val password = readln()
 
-            2 -> {
-                ConsoleUtils.loginHeader()
+                    accountService.createAccount(id, ownerAccountName, password)
+                }
 
-                print("Digite o id da conta: ")
-                val id = readln()
+                2 -> {
+                    ConsoleUtils.loginHeader()
 
-                print("Digite a senha da conta: ")
-                val password = readln()
+                    print("Digite o id da conta: ")
+                    val id = readln()
 
-                if (accountService.login(id, password)) {
-                    account = accountService.retrieveAccountById(id)!!
-                    println("Logon realizado com sucesso. Seja bem vindo ${account.ownerAccountName}")
-                } else {
-                    println("Erro ao logar.")
+                    print("Digite a senha da conta: ")
+                    val password = readln()
+
+                    if (accountService.login(id, password)) {
+                        loggedAccount = accountService.retrieveAccountById(id)!!
+                        println("Logon realizado com sucesso. Seja bem vindo ${loggedAccount.ownerAccountName}")
+                    } else {
+                        println("Erro ao logar.")
+                    }
+                }
+
+                3 -> {
+                    println("Encerrando...")
+                    execution = false
+                }
+
+                else -> {
+                    println("Erro opção inválida")
                 }
             }
+        }
 
-            3 -> {
-                ConsoleUtils.depositHeader()
+        if (loggedAccount != null) {
+            ConsoleUtils.printLoggedMenu()
+            action = readln().toInt()
 
-                try {
-                    if (account != null) {
+            when (action) {
+                1 -> {
+                    ConsoleUtils.depositHeader()
+
+                    try {
                         print("Informe o valor do depósito: ")
                         val value = readln().toDouble()
-                        account.deposit(value)
-                        accountService.saveBalance(account)
-                    } else {
-                        println("Erro usuário não logado.")
+                        loggedAccount.deposit(value)
+                        accountService.saveBalance(loggedAccount)
+                    } catch (ex: NumberFormatException) {
+                        println("Informe um valor válido.")
                     }
-                } catch (ex: NumberFormatException) {
-                    println("Informe um valor válido.")
                 }
-            }
 
-            4 -> {
-                ConsoleUtils.withDrawHeader()
+                2 -> {
+                    ConsoleUtils.withDrawHeader()
 
-                try {
-                    if (account != null) {
+                    try {
                         print("Informe o valor do saque: ")
                         val value = readln().toDouble()
-                        val success = account.withdraw(value)
+                        val success = loggedAccount.withdraw(value)
                         if (success) {
-                            accountService.saveBalance(account)
+                            accountService.saveBalance(loggedAccount)
                         }
-                    } else {
-                        println("Erro usuário não logado.")
+                    } catch (ex: NumberFormatException) {
+                        println("Informe um valor válido.")
                     }
-                } catch (ex: NumberFormatException) {
-                    println("Informe um valor válido.")
                 }
-            }
 
-            5 -> {
-                if (account != null) {
-                    account.printBalance()
-                } else {
-                    println("Erro usuário não logado.")
+                3 -> {
+                    loggedAccount.printBalance()
                 }
-            }
 
-            6 -> {
-                println("Encerrando...")
-                execution = false
-            }
+                4 -> {
+                    println("Deslogando...")
+                    loggedAccount = null
+                }
 
-            else -> {
-                println("Erro opção inválida")
+                else -> {
+                    println("Erro opção inválida")
+                }
             }
         }
     }
