@@ -100,4 +100,12 @@ assim
 
 [Getters e Setter exemplos](./sec03/GettersESetters.kt)
 
-###
+## Herança
+
+A herança é um dos conceitos principais em poo, permite que criemos classes derivadas de outras classes existentes
+herdando assim os seus atributos e comportamentos, ou até mesmo podemos modificar e adicionar novos recursos a nova 
+classe.
+
+Exemplo:
+
+[Herança](./sec04)
